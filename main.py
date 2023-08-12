@@ -1,3 +1,4 @@
 print("Hello world")
 print("Hello Dhiva")
-print("Hello Adhi")
+print("Hello sai")
+print("Hello Devi")
