@@ -6,3 +6,4 @@ img = cv.imread("Images\images.jpeg")
 
 cv.imshow(img)
 cv.waitKey(0)
+print("hello world")
