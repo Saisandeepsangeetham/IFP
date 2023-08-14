@@ -32,10 +32,10 @@ while (True):
     # camera frame is read...
     gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
     
-    faces = face_detector.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=4)
+    faces = face_detector.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5)
     
     for (x,y,w,h) in faces:
-        #cv.rectangle(img, (x,y),(x+w,y+h), (255,0,0), 2)
+        cv.rectangle(img, (x,y),(x+w,y+h), (255,0,0), 2)
         count+=1
         
         cv.imwrite("Face_detect/dataset/user."+ str(face_id) + '.' + str(count) + ".jpg",img) 
@@ -45,7 +45,7 @@ while (True):
     
     if k == 27:
         break
-    elif count >=15:
+    elif count >=55:
         break
 cam.release()
 cv.destroyAllWindows()
