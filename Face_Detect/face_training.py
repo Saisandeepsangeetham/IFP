@@ -34,6 +34,7 @@ if os.path.exists(os.getcwd()):
 else:
     print("The dataset directory is not found")
 
-print(face_no)
+#print(face_no)
+
 recognizer.train(face_train,np.array(face_no))
 recognizer.save("D:/IFP/Face_Detect/face_trainer.yml")
