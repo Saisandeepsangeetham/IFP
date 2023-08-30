@@ -3,7 +3,7 @@ import cv2 as cv
 import numpy as np
 from PIL import Image
 
-detector = cv.CascadeClassifier(r"Face_detect/haar_cascade.xml")
+detector = cv.CascadeClassifier(r"Face_Detect/haar_cascade.xml")
 
 recognizer = cv.face.LBPHFaceRecognizer.create()
 recognizer.read(r"Face_Detect/face_trainer.yml")
@@ -23,16 +23,22 @@ while True:
         face_roi = gray[y:y+h, x:x+w]
 
         id_,conf = recognizer.predict(face_roi)
-        print(conf)
+        #print(conf)
         #print(id_)
-        if conf >=100:
+        
+        if conf <=100:
             font = cv.FONT_HERSHEY_SIMPLEX
             name = names[id_]
-            cv.putText(frame, name, (x,y),font, 1, (255,0,0), 2)
-            cv.rectangle(frame, (x,y),(x+w,y+h), (255,0,0), thickness = 2)
+            
+        else:
+            name = "unknown"
+
+        cv.putText(frame, name, (x,y),font, 1, (255,0,0), 2)
+        cv.rectangle(frame, (x,y),(x+w,y+h), (255,0,0), thickness = 2)
+        
     cv.imshow("preview",frame)
     
-    k = cv.waitKey(20) & 0xff
+    k = cv.waitKey(10) & 0xff
     if k==27:
         break
     
