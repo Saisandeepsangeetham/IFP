@@ -1,6 +1,7 @@
 import os 
 import cv2 as cv
 import numpy as np
+import pyttsx3
 from PIL import Image
 
 detector = cv.CascadeClassifier(r"Face_Detect/haar_cascade.xml")
@@ -10,7 +11,13 @@ recognizer.read(r"Face_Detect/face_trainer.yml")
 
 cam = cv.VideoCapture(0)
 
-names = ['None','Sai','Dhivagar','Mom','super']
+names = ['None','sai']
+
+engine = pyttsx3.init()
+
+engine.setProperty('rate', 150)
+
+detected_faces = set()
 
 while True:
     isTrue, frame = cam.read()
@@ -25,9 +32,9 @@ while True:
         id_,conf = recognizer.predict(face_roi)
         #print(conf)
         #print(id_)
+        font = cv.FONT_HERSHEY_SIMPLEX
         
         if conf <=100:
-            font = cv.FONT_HERSHEY_SIMPLEX
             name = names[id_]
             
         else:
@@ -36,6 +43,11 @@ while True:
         cv.putText(frame, name, (x,y),font, 1, (255,0,0), 2)
         cv.rectangle(frame, (x,y),(x+w,y+h), (255,0,0), thickness = 2)
         
+        if name not in detected_faces:
+            engine.say(f"Detected face: {name}")
+            engine.runAndWait()
+            detected_faces.add(name)
+            
     cv.imshow("preview",frame)
     
     k = cv.waitKey(10) & 0xff
