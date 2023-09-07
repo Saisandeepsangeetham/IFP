@@ -10,7 +10,7 @@ recognizer.read(r"Face_Detect/face_trainer.yml")
 
 cam = cv.VideoCapture(0)
 
-names = ['None','Sai','Dhivagar']
+names = ['None','Sai','Nishi','Teja','Mom']
 
 while True:
     isTrue, frame = cam.read()
