@@ -12,11 +12,13 @@ face_no = []
 os.chdir("D:/IFP/Face_Detect/dataset")
 
 data = os.getcwd()
-print(data)
+#print(data)
+
 if os.path.exists(os.getcwd()):
     for dirpath, dirname, filename in os.walk(os.getcwd()):
         for files in filename:
             #print(files)
+            
             path = os.path.join(data,files)
             name_id = int(os.path.basename(path).split(".")[1])
             face_no.append(name_id) 

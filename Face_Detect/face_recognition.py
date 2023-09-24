@@ -11,6 +11,7 @@ recognizer.read(r"Face_Detect/face_trainer.yml")
 
 cam = cv.VideoCapture(0)
 
+<<<<<<< HEAD
 names = ['None','sai']
 
 engine = pyttsx3.init()
@@ -18,6 +19,9 @@ engine = pyttsx3.init()
 engine.setProperty('rate', 150)
 
 detected_faces = set()
+=======
+names = ['None','Sai','Nishi','Teja','Mom']
+>>>>>>> Branch1
 
 while True:
     isTrue, frame = cam.read()
@@ -30,6 +34,8 @@ while True:
         face_roi = gray[y:y+h, x:x+w]
 
         id_,conf = recognizer.predict(face_roi)
+        font = cv.FONT_HERSHEY_SIMPLEX
+        
         #print(conf)
         #print(id_)
         font = cv.FONT_HERSHEY_SIMPLEX
