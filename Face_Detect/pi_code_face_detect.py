@@ -1,5 +1,10 @@
 import cv2 as cv
 import numpy as np
+import pyttsx3
+
+engine = pyttsx3.init()
+
+engine.setProperty('rate',150)
 
 detector = cv.CascadeClassifier(r"Face_Detect/haar_cascade.xml")
 
@@ -25,6 +30,8 @@ gray = cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
 
 faces = detector.detectMultiScale(gray, scaleFactor=1.1,minNeighbors=5)
 
+detected_faces = set()
+
 for (x,y,w,h) in faces:
     face_roi = gray[y:y+h,x:x+w]
     
@@ -40,6 +47,11 @@ for (x,y,w,h) in faces:
     
     cv.putText(frame,name,(x,y),font,1,(255,0,0),2)
     cv.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), thickness=2)
+    
+    if name not in detected_faces:
+        engine.say(f"Detected face: {name}")
+        engine.runAndWait()
+        detected_faces.add(name)
     
 cv.imshow("preview",frame)
 
