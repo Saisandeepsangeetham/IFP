@@ -10,7 +10,7 @@ recognizer.read(r"Face_Detect/face_trainer.yml")
 
 cam = cv.VideoCapture(0)
 
-names = ['None','Sai','Dhivagar']
+names = ['None','Sai','Nishi','Teja','Mom']
 
 while True:
     isTrue, frame = cam.read()
@@ -23,11 +23,12 @@ while True:
         face_roi = gray[y:y+h, x:x+w]
 
         id_,conf = recognizer.predict(face_roi)
+        font = cv.FONT_HERSHEY_SIMPLEX
+        
         #print(conf)
         #print(id_)
         
         if conf <=100:
-            font = cv.FONT_HERSHEY_SIMPLEX
             name = names[id_]
             
         else:
